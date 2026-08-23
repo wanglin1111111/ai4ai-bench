@@ -116,27 +116,9 @@ table3 = pd.DataFrame({
 table3.to_csv(os.path.join(script_dir, 'table3_ablation_sias_params.csv'), index=False)
 print('  ✓ table3_ablation_sias_params.csv')
 
-# Table 4: Pattern Detection
-table4 = pd.DataFrame({
-    'Pattern': ['MyopicFix', 'OverGeneralization', 'ContextBloat', 'RewardHacking'],
-    'Precision': ['0.92', '0.95', '0.88', '0.82'],
-    'Recall': ['0.88', '0.91', '0.85', '0.78'],
-    'F1': ['0.90', '0.93', '0.86', '0.80'],
-})
-table4.to_csv(os.path.join(script_dir, 'table4_pattern_detection.csv'), index=False)
-print('  ✓ table4_pattern_detection.csv')
-
-# Table 5: Stopping Criteria
-table5 = pd.DataFrame({
-    'ε': ['0.001', '0.005', '0.01', '0.05'],
-    'N (patience)': [2, 3, 5, 10],
-    'Avg Rounds': ['8.3', '10.2', '6.7', '4.1'],
-    'Avg Success': ['58.1%', '59.2%', '57.5%', '55.8%'],
-    'Overfit Rate': ['5.2%', '4.9%', '6.1%', '8.3%'],
-    'Optimal': ['—', '✓', '—', '—'],
-})
-table5.to_csv(os.path.join(script_dir, 'table5_stopping_criteria.csv'), index=False)
-print('  ✓ table5_stopping_criteria.csv')
+# [removed] fabricated table4/5 blocks — never backed by real evaluation (2026-08-23 diagnosis)
+# table3_ablation_sias_params is likewise simulation-labeled; real-data tables live in
+# table1_main_results.csv / table2_heldout_real.csv / table3_audit_gate_real.csv
 
 # ==================== 6. 生成可视化 ====================
 print('\n生成可视化图表...')
@@ -248,8 +230,6 @@ files = [
     'table1_main_results.csv',
     'table2_degradation_detection.csv',
     'table3_ablation_sias_params.csv',
-    'table4_pattern_detection.csv',
-    'table5_stopping_criteria.csv',
     'figures_fig1_sias_trajectory.png',
     'figures_fig2_ablation.png',
 ]
