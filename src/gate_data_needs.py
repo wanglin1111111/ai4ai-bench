@@ -17,8 +17,10 @@ import numpy as np
 from datetime import datetime, timezone
 from pathlib import Path
 
-BASE = Path(r"C:/dev/Harness-R1/examples/heldout_generalization")
-OUT_DIR = Path(r"C:/Users/22812/OneDrive/Desktop/本机记忆")
+import os
+BASE = Path(os.environ.get("HARNESS_R1_RESULTS",
+    "Harness-R1/examples/heldout_generalization"))
+OUT_DIR = Path(__file__).resolve().parent
 
 GATE_VERSION = "sias-gate-v1.0(subset-sign)"
 
