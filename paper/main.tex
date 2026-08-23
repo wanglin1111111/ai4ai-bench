@@ -131,6 +131,7 @@ PromptDrift & Prompt similarity $< 0.8$ & Low \\
 \bottomrule
 \end{tabular}
 \end{table}
+\noindent MyopicFix and OverGeneralization are evaluated on real patches (Section 6.3); ContextBloat, RewardHacking, NegativeTransfer, and PromptDrift are operational definitions not yet evaluated.
 
 \subsection{Recursive Improvement Protocol}
 
@@ -160,42 +161,76 @@ PromptDrift & Prompt similarity $< 0.8$ & Low \\
 \section{Experiments}
 \label{sec:experiments}
 
-\subsection{Main Results}
+\subsection{Data Sources}
+We combine (i) published in-batch results from Harness-R1 \citep{shao2026harnessr1} for baseline positioning, and (ii) the official held-out generalization records released in its repository (\texttt{examples/heldout\_generalization/results.json}): 27 real patches by three editors under a \texttt{random10\_failure\_evidence} protocol, with ground truth on 1{,}270 held-out tasks (WebShop 490, ALFWorld 490, DBBench 290) over three seeds, including per-patch rescued/regressed counts. Sections 6.2--6.4 use this real data; Section 6.5 is explicitly labeled simulation.
+
+\subsection{Published Baselines (Real, Cited)}
 
 \begin{table}[h]
 \centering
-\caption{Main results across three benchmarks. Overfit rate = max(0, train\_succ $-$ holdout\_succ).}
+\caption{In-batch editing results, reproduced verbatim from Shao et al. (2026), Table 1. $\dagger$Reflection uses a two-episode protocol, not directly comparable to single-episode rows.}
 \label{tab:main}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Method} & \textbf{WebShop (Score)} & \textbf{ALFWorld (All)} & \textbf{DBBench (Succ.)} & \textbf{Avg} \\
+\midrule
+Vanilla Qwen3.5-9B & 66.0 & 40.6 & 61.0 & 44.3 \\
+ReAct & 66.8 & 43.4 & 61.7 & 47.5 \\
+Self-Refine & 61.7 & 39.0 & 57.3 & 41.8 \\
+Reflection$^\dagger$ & 61.2 & 59.2 & 64.7 & 55.8 \\
+Qwen3.5-397B (editor) & 66.4 & 41.2 & 63.3 & 45.8 \\
+GLM-5.2 (editor) & 68.4 & 45.0 & 65.3 & 48.8 \\
+\textbf{Harness-R1 (trained 9B)} & \textbf{69.9} & \textbf{53.2} & \textbf{65.3} & \textbf{53.6} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Prompted editing with fixed rules (Self-Refine) lowers reward on all three benchmarks.
+
+\subsection{Held-Out Generalization: Real Degradation (Real)}
+
+\begin{table}[h]
+\centering
+\caption{Held-out generalization of published harness edits (real data; 1{,}270 held-out tasks, 3 seeds). Frontier editors are net-negative out-of-batch.}
+\label{tab:heldout}
 \begin{tabular}{lccccc}
 \toprule
-\textbf{Method} & \textbf{WebShop} & \textbf{ALFWorld} & \textbf{SWE-bench} & \textbf{Avg} & \textbf{Overfit} \\
+\textbf{Editor} & \textbf{Valid} & \textbf{Pooled $\Delta$ (pp)} & \textbf{Resc./Regr.} & \textbf{Destr.\ rate} & \textbf{Worst patch} \\
 \midrule
-Vanilla Qwen3.5-9B & 66.7 & 75.8 & 42.1 & 44.3 & --- \\
-Harness-R1 (single) & 70.5 & 79.8 & 48.3 & 53.6 & 12.3 \\
-Ungated recursion & 72.1 & 81.3 & 51.7 & 56.8 & 18.7 \\
-\textbf{SIAS-gated (Ours)} & \textbf{74.2} & \textbf{82.1} & \textbf{54.6} & \textbf{59.2} & \textbf{4.9} \\
+Harness-R1 (RL) & 9/9 & $+8.92 \pm 1.50$ & 543/203 & 27\% & $+13$ \\
+Qwen3.5-397B & 8/9 & $-4.33 \pm 2.52$ & 129/294 & \textbf{70\%} & $-71$ (0/71) \\
+DeepSeek-V4-Pro & 6/9 & $-0.42 \pm 3.58$ & 191/207 & 52\% & $-83$ (47/130) \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Simulation Validation}
+Two textbook patterns appear in the wild: one real patch rescued \textbf{zero} failures while destroying \textbf{71} successes (pure MyopicFix); another rescued 47 but destroyed 130 (OverGeneralization). Format compliance itself is a differentiator (9/9 vs.\ 6/9 valid).
+
+\subsection{SIAS Audit Gate on Real Patches (Real)}
+
+To avoid circularity, the gate observes only a random audit subset and accepts iff its estimated net effect is positive; ground truth is the full-set delta (200 resamples per budget).
 
 \begin{table}[h]
 \centering
-\caption{Degradation detection on simulated scenarios.}
-\label{tab:simulation}
-\begin{tabular}{lccc}
+\caption{Audit-gate decision quality vs.\ budget (real patches).}
+\label{tab:gate}
+\begin{tabular}{lccccc}
 \toprule
-\textbf{Scenario} & \textbf{SIAS Score} & \textbf{Patterns Detected} & \textbf{Action} \\
+\textbf{Budget} & \textbf{Accuracy} & \textbf{Correct rej.\ (12)} & \textbf{Wrong rej.\ (15)} & \textbf{Net $\Delta$} & \textbf{vs.\ no audit} \\
 \midrule
-Normal improvement & +0.036 & --- & Accept \\
-Overfit & $-$0.147 & OverGen, MyopicFix & Reject \\
-Myopic fix & $-$0.093 & MyopicFix & Reject \\
+20 & 77\% $\pm$ 7\% & 11.0 & 5.1 & $+327$ & $+168$ \\
+50 & \textbf{87\% $\pm$ 6\%} & 11.1 & 2.6 & $+410$ & $+251$ \\
+100 & 92\% $\pm$ 4\% & 11.3 & 1.4 & $+438$ & $+279$ \\
+200 & 97\% $\pm$ 3\% & 11.7 & 0.6 & $+454$ & $+295$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\subsection{Ablation Studies}
+At budget 50 the gate still admits on average 0.9 of the 8 negative patches (concentrated in the smallest negative deltas, $\Delta \geq -5$), falling to 0.26 at budget 200; the dominant error mode at low budget is missing small positive patches ($\Delta \leq 6$) rather than admitting destructive ones. Patch complexity does not predict quality (single-hook: $+44.7$ for Harness-R1 vs.\ $-47.0$ for Qwen3.5-397B); the destruction structure is the informative signal.
+
+\subsection{Simulation Validation (Labeled: Simulation)}
+
+Our 12-round simulation validates protocol dynamics under injected degradation: 10/12 rounds accepted; injected overfit and myopic rounds detected and rolled back (detection 100\%, false positives 0\%); simulated overfit rate 1.38\% vs.\ 11.71\% ungated. These are \textbf{simulation numbers}, not benchmark results.
 
 \begin{figure}[h]
 \centering
