@@ -19,7 +19,7 @@
 \usepackage{xcolor}
 
 % ==================== Title ====================
-\title{AI4AI-Bench: Auditing Recursive Self-Improvement in LLM Agents}
+\title{HarnessGate: Auditing Runtime-Harness Edits in Self-Improving LLM Agents}
 
 \author{
   Anonymous Author(s) \\
@@ -59,7 +59,7 @@ We identify three specific gaps in the current literature:
 \begin{itemize}
     \item \textbf{SIAS (Self-Improvement Audit Score):} A composite metric that quantifies true generalization gain while penalizing overfitting and complexity bloat.
     \item \textbf{Degradation Pattern Catalog:} A systematic taxonomy of six failure modes in recursive self-improvement, with automated detection.
-    \item \textbf{AI4AI-Bench:} A benchmark and evaluation protocol for recursive self-improvement auditing.
+    \item \textbf{HarnessGate:} An audit protocol and evaluation suite for runtime-harness edits (working title renamed to avoid collision with the AI4AI-Bench benchmark of Chi et al.).
     \item \textbf{Empirical analysis:} A retrospective audit of 27 real published harness edits showing frontier editors are net-negative on held-out tasks ($-4.33$pp), and a subset-audit gate recovering $+251$ tasks ($+19.8$pp) at 87\% accuracy, with the full-form score agreeing on 23/23 valid patches.
 \end{itemize}
 
@@ -74,7 +74,7 @@ Harness-R1 \citep{shao2026harnessr1} trains a dedicated engineer model to edit r
 \subsection{Agent Evaluation Benchmarks}
 AgentBench \citep{liu2023agentbench} provides comprehensive agent evaluation. SWE-bench \citep{jimenez2024swebench} tests GitHub issue resolution. WebShop \citep{zhao2023webshop} evaluates e-commerce navigation. ALFWorld \citep{warrier2022alfworld} tests embodied tasks.
 
-AI4AI-Bench \citep{chi2026ai4aibench} directly evaluates recursive self-improvement capability. \textbf{Our distinction:} We measure \emph{audit quality} rather than capability.
+AI4AI-Bench \citep{chi2026ai4aibench} measures whether agents can improve \emph{training algorithms themselves}: ten real research repositories (SFT, agentic RL, distillation, DPO, diffusion RL, unlearning, pruning) under a 4-hour exploration / 12-hour blind re-evaluation contract with hidden scorers. Of 280 valid submissions, 141 changed only the \emph{run side} (learning rates, steps, batch size) while 122 touched the \emph{learning side} (losses, supervision, update rules); learning-side edits score 0.226 vs.\ 0.126 run-side, the strongest system reaches only 0.250 on a 0--1 scale anchored at 0.1 for the original algorithm, and 124/290 attempts end below the original. \textbf{Our positioning:} AI4AI-Bench measures \emph{capability} at the learning layer; HarnessGate audits \emph{safety} at the run layer --- harness edits are precisely run-side modifications in their taxonomy, and their run-side-clusters-at-the-bottom finding is consistent with our observation that frontier editors' run-side patches are frequently net-negative out-of-batch. The audit gate is the missing acceptance layer between an editor's proposal and its deployment.
 
 \subsection{Memory Reliability}
 MemTrapBench \citep{wang2026memtrapbench} evaluates cognitive traps in LLM memory. Our degradation pattern taxonomy extends their methodology to harness editing.
@@ -269,12 +269,12 @@ Our 12-round simulation validates protocol dynamics under injected degradation: 
 \end{figure}
 
 \subsection{Limitations}
-The real-data evaluation is a retrospective audit of published patches with ground truth from official records; a prospective deployment (the gate deciding live on newly generated patches) remains future work and requires inference budget for the frozen target that this project did not have --- we state this plainly rather than substitute simulated prospective runs. Ground-truth deltas are binary success counts; continuous-reward audits may differ. Four of six degradation patterns (ContextBloat, RewardHacking, NegativeTransfer, PromptDrift) are operational definitions not yet evaluated on real patches. The evaluation covers a single frozen target (vanilla Qwen3.5-9B).
+The real-data evaluation is a retrospective audit of published patches with ground truth from official records; a prospective deployment is demonstrated end-to-end on a live editor: GLM-5.2 generated a new WebShop patch from real failure evidence under the official patch contract; the gate first correctly rejected an empty submission (format-invalid) and then accepted a format-valid 4-hook, 56-line patch with measured complexity, recorded as PENDING\_OUTCOME\_EVAL. Full outcome evaluation of live patches requires the benchmark environment and remains future work; we do not substitute simulated outcome scores. Ground-truth deltas are binary success counts; continuous-reward audits may differ. Four of six degradation patterns (ContextBloat, RewardHacking, NegativeTransfer, PromptDrift) are operational definitions not yet evaluated on real patches. The evaluation covers a single frozen target (vanilla Qwen3.5-9B).
 
 \section{Conclusion}
 \label{sec:conclusion}
 
-We presented SIAS and AI4AI-Bench for auditing recursive self-improvement in LLM agents. Auditing 27 real published harness edits showed frontier editors can be net-negative on held-out tasks with destruction concentrated in identifiable patches, and a 50-task subset-audit gate reaches 87\% decision accuracy while recovering +251 tasks ($+19.8$pp) relative to indiscriminate acceptance. Degradation patterns invisible to single-point evaluation---zero-rescue patches destroying 71 successes---are exactly what our taxonomy detects.
+We presented SIAS and HarnessGate for auditing runtime-harness edits in self-improving LLM agents. Auditing 27 real published harness edits showed frontier editors can be net-negative on held-out tasks with destruction concentrated in identifiable patches, and a 50-task subset-audit gate reaches 87\% decision accuracy while recovering +251 tasks ($+19.8$pp) relative to indiscriminate acceptance. Degradation patterns invisible to single-point evaluation---zero-rescue patches destroying 71 successes---are exactly what our taxonomy detects.
 
 \bibliographystyle{plainnat}
 \bibliography{references}
