@@ -1,0 +1,8 @@
+Method,WebShop_Succ,ALFWorld,DBBench,Avg
+Vanilla Qwen3.5-9B,31.2,40.6,61.0,44.3
+ReAct,37.4,43.4,,47.5
+Self-Refine,29.0,39.0,,41.8
+Reflection,43.6,59.2,,55.8
+Qwen3.5-397B (editor),32.8,41.2,,45.8
+GLM-5.2 (editor),36.0,45.0,,48.8
+Harness-R1 (trained 9B),,,,53.6
