@@ -1,0 +1,99 @@
+{
+  "source": "Harness-R1 official heldout_generalization results.json (REAL published data)",
+  "meta": {
+    "protocol": "random10_failure_evidence_one_patch_full_split",
+    "target_agent": "Qwen3.5-9B (frozen, vanilla)",
+    "held_out_tasks": {
+      "webshop": 490,
+      "alfworld": 490,
+      "dbbench": 290,
+      "pooled": 1270
+    },
+    "seeds": [
+      20260720,
+      20260721,
+      20260722
+    ]
+  },
+  "editor_summary": {
+    "harness-r1": {
+      "display_name": "Harness-R1 (RL, iter143)",
+      "valid_patches": "9/9",
+      "pooled_delta_pp_mean": 8.92,
+      "pooled_delta_pp_std": 1.5,
+      "per_bench_pp": {
+        "webshop": 9.12,
+        "alfworld": 11.16,
+        "dbbench": 4.83
+      },
+      "n_positive": 9,
+      "n_negative": 0
+    },
+    "qwen3.5-397b": {
+      "display_name": "Qwen3.5-397B",
+      "valid_patches": "8/9",
+      "pooled_delta_pp_mean": -4.33,
+      "pooled_delta_pp_std": 2.52,
+      "per_bench_pp": {
+        "webshop": -9.59,
+        "alfworld": -2.38,
+        "dbbench": 1.26
+      },
+      "n_positive": 2,
+      "n_negative": 6
+    },
+    "deepseek-v4-pro": {
+      "display_name": "DeepSeek-V4-Pro",
+      "valid_patches": "6/9",
+      "pooled_delta_pp_mean": -0.42,
+      "pooled_delta_pp_std": 3.58,
+      "per_bench_pp": {
+        "webshop": 3.81,
+        "alfworld": -5.65,
+        "dbbench": 1.26
+      },
+      "n_positive": 4,
+      "n_negative": 2
+    }
+  },
+  "signal_hooks": {
+    "one_hook_mean_delta": 5.44,
+    "multi_hook_mean_delta": 7.86
+  },
+  "gate_budget_scan": {
+    "20": {
+      "accuracy_mean": 0.7748,
+      "accuracy_std": 0.0701,
+      "expected_net_delta": 327.2,
+      "net_delta_std": 61.0,
+      "avg_correctly_rejected_neg": 11.01,
+      "avg_wrongly_rejected_pos": 5.08
+    },
+    "50": {
+      "accuracy_mean": 0.8717,
+      "accuracy_std": 0.056,
+      "expected_net_delta": 410.2,
+      "net_delta_std": 33.3,
+      "avg_correctly_rejected_neg": 11.09,
+      "avg_wrongly_rejected_pos": 2.55
+    },
+    "100": {
+      "accuracy_mean": 0.9211,
+      "accuracy_std": 0.0436,
+      "expected_net_delta": 437.9,
+      "net_delta_std": 20.7,
+      "avg_correctly_rejected_neg": 11.3,
+      "avg_wrongly_rejected_pos": 1.44
+    },
+    "200": {
+      "accuracy_mean": 0.968,
+      "accuracy_std": 0.0341,
+      "expected_net_delta": 453.5,
+      "net_delta_std": 6.2,
+      "avg_correctly_rejected_neg": 11.74,
+      "avg_wrongly_rejected_pos": 0.6
+    }
+  },
+  "no_audit_baseline_net_delta": 159,
+  "note": "v1 的 100% 准确率为循环论证(delta=rescued-regressed); v2 审计门仅观测随机子集, ground truth 为全量 held-out, 非循环。"
+}
