@@ -1,0 +1,441 @@
+{
+  "gate_version": "sias-gate-v1.0(subset-sign)",
+  "budget": 50,
+  "subset_seed": 2024,
+  "n_decisions": 27,
+  "n_accept": 13,
+  "n_reject": 10,
+  "n_reject_low_conf_with_n_estimate": 3,
+  "n_data_need_items_issued": 14,
+  "trajectory_log": [
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260720/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 5,
+        "g": 0,
+        "d_hat": 5
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260720/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 8,
+        "g": 2,
+        "d_hat": 6
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260720/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 2,
+        "g": 0,
+        "d_hat": 2
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260721/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 6,
+        "g": 1,
+        "d_hat": 5
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260721/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 13,
+        "g": 4,
+        "d_hat": 9
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260721/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 1,
+        "g": 2,
+        "d_hat": -1
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": 1.0,
+      "n_more_tasks_needed": 135,
+      "data_needs": [
+        "mixed_effect: rescued(1) ~ regressed(2) — need per-task trajectory diffs to identify which baseline successes regressed and why"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260722/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 6,
+        "g": 2,
+        "d_hat": 4
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260722/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 11,
+        "g": 7,
+        "d_hat": 4
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "harness-r1/20260722/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 4,
+        "g": 1,
+        "d_hat": 3
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260720/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 0,
+        "g": 9,
+        "d_hat": -9
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": 0,
+      "data_needs": [
+        "webshop_negative: prior real failures concentrated in over-aggressive action blocking — need failure packets of blocked-but-correct actions"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260720/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "decision": "REJECT_INVALID",
+      "route": "CI",
+      "d_hat": null,
+      "data_needs": [
+        "format_invalid: rerun editor with stricter output contract"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260720/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 2,
+        "g": 0,
+        "d_hat": 2
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260721/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 0,
+        "g": 5,
+        "d_hat": -5
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": 0,
+      "data_needs": [
+        "webshop_negative: prior real failures concentrated in over-aggressive action blocking — need failure packets of blocked-but-correct actions"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260721/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 4,
+        "g": 8,
+        "d_hat": -4
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": 0,
+      "data_needs": [
+        "mixed_effect: rescued(4) ~ regressed(8) — need per-task trajectory diffs to identify which baseline successes regressed and why",
+        "alfworld_negative: prior regressions concentrated in multi-hook patches — need hook-trigger logs to attribute damage to a specific hook"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260721/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 2,
+        "g": 2,
+        "d_hat": 0
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": null,
+      "data_needs": [
+        "mixed_effect: rescued(2) ~ regressed(2) — need per-task trajectory diffs to identify which baseline successes regressed and why"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260722/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 0,
+        "g": 0,
+        "d_hat": 0
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": null,
+      "data_needs": [
+        "no_signal_in_subset: subset contains no flipped tasks — sample tasks from the benchmark's failure-dense regions (where baseline failed)"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260722/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 3,
+        "g": 8,
+        "d_hat": -5
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": 0,
+      "data_needs": [
+        "mixed_effect: rescued(3) ~ regressed(8) — need per-task trajectory diffs to identify which baseline successes regressed and why",
+        "alfworld_negative: prior regressions concentrated in multi-hook patches — need hook-trigger logs to attribute damage to a specific hook"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "qwen3.5-397b/20260722/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 1,
+        "g": 2,
+        "d_hat": -1
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": 1.0,
+      "n_more_tasks_needed": 135,
+      "data_needs": [
+        "mixed_effect: rescued(1) ~ regressed(2) — need per-task trajectory diffs to identify which baseline successes regressed and why"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260720/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 3,
+        "g": 4,
+        "d_hat": -1
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": 1.0,
+      "n_more_tasks_needed": 135,
+      "data_needs": [
+        "mixed_effect: rescued(3) ~ regressed(4) — need per-task trajectory diffs to identify which baseline successes regressed and why",
+        "webshop_negative: prior real failures concentrated in over-aggressive action blocking — need failure packets of blocked-but-correct actions"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260720/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "decision": "REJECT_INVALID",
+      "route": "CI",
+      "d_hat": null,
+      "data_needs": [
+        "format_invalid: rerun editor with stricter output contract"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260720/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 4,
+        "g": 3,
+        "d_hat": 1
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260721/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 5,
+        "g": 0,
+        "d_hat": 5
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260721/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 4,
+        "g": 8,
+        "d_hat": -4
+      },
+      "decision": "REJECT",
+      "route": "harness-engineer",
+      "confidence": null,
+      "n_more_tasks_needed": 0,
+      "data_needs": [
+        "mixed_effect: rescued(4) ~ regressed(8) — need per-task trajectory diffs to identify which baseline successes regressed and why",
+        "alfworld_negative: prior regressions concentrated in multi-hook patches — need hook-trigger logs to attribute damage to a specific hook"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260721/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "decision": "REJECT_INVALID",
+      "route": "CI",
+      "d_hat": null,
+      "data_needs": [
+        "format_invalid: rerun editor with stricter output contract"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260722/webshop",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 5,
+        "g": 1,
+        "d_hat": 4
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260722/alfworld",
+      "budget": 50,
+      "subset_seed": 2024,
+      "decision": "REJECT_INVALID",
+      "route": "CI",
+      "d_hat": null,
+      "data_needs": [
+        "format_invalid: rerun editor with stricter output contract"
+      ]
+    },
+    {
+      "ts": "2026-08-23T14:18:06+00:00",
+      "gate_version": "sias-gate-v1.0(subset-sign)",
+      "patch": "deepseek-v4-pro/20260722/dbbench",
+      "budget": 50,
+      "subset_seed": 2024,
+      "observed": {
+        "r": 4,
+        "g": 0,
+        "d_hat": 4
+      },
+      "decision": "ACCEPT",
+      "route": "none"
+    }
+  ],
+  "audit_note": "append-only: every entry carries gate_version+subset_seed+budget; rollback/override requires appending a new entry, never editing"
+}
