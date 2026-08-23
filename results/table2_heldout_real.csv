@@ -1,0 +1,4 @@
+Editor,Valid_Patches,Pooled_HeldOut_Delta_pp,WebShop_Delta_pp,ALFWorld_Delta_pp,DBBench_Delta_pp,Total_Rescued,Total_Regressed,Destruction_Rate,Worst_Patch
+Harness-R1 (RL),9/9,+8.92 +/- 1.50,+9.12,+11.16,+4.83,543,203,27%,+13 (never negative)
+Qwen3.5-397B,8/9,-4.33 +/- 2.52,-9.59,-2.38,+1.26,129,294,70%,-71 (0 rescued/71 regressed)
+DeepSeek-V4-Pro,6/9,-0.42 +/- 3.58,+3.81,-5.65,+1.26,191,207,52%,-83 (47/130)
