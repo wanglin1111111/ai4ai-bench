@@ -12,8 +12,10 @@ import json
 import numpy as np
 from pathlib import Path
 
-BASE = Path(r"C:/dev/Harness-R1/examples/heldout_generalization")
-OUT = Path(r"C:/Users/22812/OneDrive/Desktop/本机记忆/sias_full_real_results.json")
+import os
+BASE = Path(os.environ.get("HARNESS_R1_RESULTS",
+    "Harness-R1/examples/heldout_generalization"))
+OUT = Path(__file__).resolve().parent / "sias_full_real_results.json"
 
 ALPHA, BETA, GAMMA = 1.0, 0.3, 0.0005
 
