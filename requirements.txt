@@ -1,0 +1,4 @@
+# 运行 src/ 下审计与实验管线所需依赖（prospective_demo --offline 仅用标准库）
+numpy>=1.24,<3
+pandas>=2.0,<4
+matplotlib>=3.7,<4
