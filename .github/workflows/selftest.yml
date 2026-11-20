@@ -1,0 +1,17 @@
+name: selftest
+on: [push, pull_request, workflow_dispatch]
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime deps
+        run: pip install -r requirements.txt
+      - name: Gate pipeline offline check
+        run: python src/prospective_demo.py --offline --log /tmp/gate_log.json
+      - name: Unit tests (gate 正反向)
+        run: python -m unittest discover -s tests -v

@@ -73,6 +73,12 @@ python src/prospective_demo.py
 - API calls use a 60s timeout and fail with a readable error instead of a stack trace; missing upstream data prints setup instructions.
 - Exit code: 0 when the patch passes format validation, 1 otherwise.
 
+Gate pipeline unit tests (offline, no network, no API key):
+
+```bash
+python -m unittest discover -s tests -v
+```
+
 ## Honesty Notes
 
 - Real-data evaluation is a **retrospective audit** of published patches; prospective live deployment is future work.
