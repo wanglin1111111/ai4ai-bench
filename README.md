@@ -47,6 +47,28 @@ python src/real_data_audit.py
 python src/run_ai4ai_bench_experiments.py
 ```
 
+## Prospective demo (HarnessGate live pipeline)
+
+`src/prospective_demo.py` runs the gate pipeline (format validation / complexity / data needs / append-only log) on a newly generated patch. Three ways to run it:
+
+```bash
+# Offline self-test: no network, no upstream data, no API key — validates the gate pipeline end to end
+python src/prospective_demo.py --offline
+
+# Feed an existing editor output file (no network)
+python src/prospective_demo.py --raw-file raw_output.txt
+
+# Live generation via Zhipu API. Requires:
+#   1. ~/.openharness/settings.json with {"base_url": ..., "api_key": ...}
+#   2. Upstream results.json (see Data Source above), provided via HARNESS_R1_RESULTS or --results
+export HARNESS_R1_RESULTS=/path/to/Harness-R1/examples/heldout_generalization/results.json
+python src/prospective_demo.py
+```
+
+- Options: `--results` (upstream results.json), `--settings` (API config path), `--log` (append-only log path, defaults to `results/gate_trajectory_log.json`).
+- API calls use a 60s timeout and fail with a readable error instead of a stack trace; missing upstream data prints setup instructions.
+- Exit code: 0 when the patch passes format validation, 1 otherwise.
+
 ## Honesty Notes
 
 - Real-data evaluation is a **retrospective audit** of published patches; prospective live deployment is future work.
